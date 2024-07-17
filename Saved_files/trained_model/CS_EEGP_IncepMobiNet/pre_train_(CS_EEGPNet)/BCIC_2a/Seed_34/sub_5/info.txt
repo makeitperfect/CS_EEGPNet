@@ -1,0 +1,1 @@
+最后的结果为: valid_accu:0.7176724076271057--test_accu:[tensor(0.6302), tensor(0.6424), tensor(0.6562), tensor(0.6458)]

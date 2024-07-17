@@ -356,8 +356,8 @@ def test(sub,params):
     net.trans_mode()
     test_accus = []
 
-    for _ in range(1):
-        few_shot_x,few_shot_y, test_dataset = get_few_shot_test(sub,data_info['data_path'],5)
+    for _ in range(20):
+        few_shot_x,few_shot_y, test_dataset = get_few_shot_test(sub,data_info['data_path'],params['k_shot'])
         test_accus.append(get_online_test_info(few_shot_x,few_shot_y,net,test_dataset,device = device)[1])
     test_accu = sum(test_accus)/len(test_accus)
 
@@ -462,7 +462,7 @@ if __name__ == '__main__':
 
         all_accu = []
         for sub in range(1,data_info['sub_num']+1): 
-            for random_seed in range(30,33):
+            for random_seed in range(30,35):
                 pparams = copy.deepcopy(pretrain_params)
                 pparams["RANDOM_SEED"]= random_seed
 
@@ -491,11 +491,11 @@ if __name__ == '__main__':
                 params = copy.deepcopy(params)
                 params["RANDOM_SEED"]= random_seed
 
-                #pretraining
-                accu = pre_train(sub,pparams)
+                # #pretraining
+                # accu = pre_train(sub,pparams)
 
-                #trainning
-                accu = train_online(sub,params)  
+                # #trainning
+                # accu = train_online(sub,params)  
                 
                 #test
                 accu = test(sub,params)
